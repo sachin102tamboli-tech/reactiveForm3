@@ -145,7 +145,8 @@
                                 </div>
                             </div>
                             <button *ngIf="skillsArray.length < 5; else skillLength" mat-arised-button
-                                class="btn btn-primary" class="mb-3" (click)="onAddSkill()" type="button">Add Skill</button>
+                                class="btn btn-primary" class="mb-3" (click)="onAddSkill()" type="button">Add
+                                Skill</button>
 
                         </div>
                         <div formArrayName="dependants">
@@ -158,17 +159,30 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" formControlName="relationship">
+
+                                            <select name="Country" formControlName="country"
+                                                formControlName="relationship" class="form-control">
+                                                <option [ngValue]="citizen.citizenship"
+                                                    *ngFor="let citizen of citizenship">
+                                                    {{citizen.citizenship}}
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" formControlName="citizenship">
+
+                                            <select name="Country" formControlName="relationship" class="form-control">
+                                                <option [value]="val" *ngFor="let val of ['Father', 'Mother', 'Son', 'Daughter', 'Wife', 'Husband']">
+                                                    {{val}}
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <select name="isWithYou" formControlName="isTravelingWithYou" class="form-control">
+                                            <select name="isWithYou" formControlName="isTravelingWithYou"
+                                                class="form-control">
                                                 <option [ngValue]="true">Yes</option>
                                                 <option [ngValue]="false">No</option>
                                             </select>
@@ -176,28 +190,30 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <button class="btn btn-sm form-control" *ngIf="i>0" color="primary" (click)="onRemoved(i)" mat-raised-button type="button">Remove</button>
+                                            <button class="btn btn-sm form-control" *ngIf="i>0" color="primary"
+                                                (click)="onRemoved(i)" mat-raised-button type="button">Remove</button>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
-                            <button *ngIf="dependantArray.length<3; else dependance"
-                             mat-raised-button class="button btn-sm mb-3" type="button" (click)="onAddDependants()" color="primary">Add Dependant</button>
+                            <button *ngIf="dependantArray.length<3; else dependance" mat-raised-button
+                                class="button btn-sm mb-3" type="button" (click)="onAddDependants()" color="primary">Add
+                                Dependant</button>
                         </div>
 
 
-                            <button mat-raised-button class="button btn-block" color="primary">Add</button>
-                            <ng-template #skillLength>
-                                <p class="alert alert-warning">
-                                    You can add only 5 skills
-                                </p>
-                            </ng-template>
-                            <ng-template #dependance>
-                                <p class="alert alert-warning">
-                                    You can add only 3 dependants.
-                                </p>
-                            </ng-template>
+                        <button mat-raised-button class="button btn-block" color="primary">Add</button>
+                        <ng-template #skillLength>
+                            <p class="alert alert-warning">
+                                You can add only 5 skills
+                            </p>
+                        </ng-template>
+                        <ng-template #dependance>
+                            <p class="alert alert-warning">
+                                You can add only 3 dependants.
+                            </p>
+                        </ng-template>
                     </form>
                 </div>
             </div>

@@ -5,6 +5,8 @@ import { NoSpaceValidator } from '../../const/noPaceValidator';
 import { EmpIdValidator } from '../../const/empIdValidator';
 import { COUNTRIES } from '../../const/country';
 import { Icountry } from '../../model/country';
+import { CITIZENSHIPS } from '../../const/citizenship';
+import { Iciti } from '../../model/citizenship';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +16,7 @@ import { Icountry } from '../../model/country';
 export class DashboardComponent implements OnInit {
   loginForm !: FormGroup
   country : Icountry[] = COUNTRIES
+  citizenship : Iciti[] = CITIZENSHIPS
   constructor() { }
 
   ngOnInit(): void {
