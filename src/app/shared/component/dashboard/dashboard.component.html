@@ -160,11 +160,11 @@
                                     <div class="col">
                                         <div class="form-group">
 
-                                            <select name="Country" formControlName="country"
-                                                formControlName="relationship" class="form-control">
-                                                <option [ngValue]="citizen.citizenship"
-                                                    *ngFor="let citizen of citizenship">
-                                                    {{citizen.citizenship}}
+                                            <select name="relationship" 
+                                                formControlName="citizenship" class="form-control">
+                                                <option [ngValue]="val.citizenship"
+                                                    *ngFor="let val of citizenships">
+                                                    {{val.citizenship}}
                                                 </option>
                                             </select>
                                         </div>
@@ -173,7 +173,7 @@
                                         <div class="form-group">
 
                                             <select name="Country" formControlName="relationship" class="form-control">
-                                                <option [value]="val" *ngFor="let val of ['Father', 'Mother', 'Son', 'Daughter', 'Wife', 'Husband']">
+                                                <option [value]="val" *ngFor="let val of ['Father', 'Mother', 'Son', 'Daughter', 'Wife', 'Husband', 'Self']">
                                                     {{val}}
                                                 </option>
                                             </select>

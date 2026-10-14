@@ -16,7 +16,7 @@ import { Iciti } from '../../model/citizenship';
 export class DashboardComponent implements OnInit {
   loginForm !: FormGroup
   country : Icountry[] = COUNTRIES
-  citizenship : Iciti[] = CITIZENSHIPS
+  citizenships : Iciti[] = CITIZENSHIPS
   constructor() { }
 
   ngOnInit(): void {
@@ -111,8 +111,8 @@ export class DashboardComponent implements OnInit {
     if(this.dependantArray.valid){
       let dependantgrp = new FormGroup({
         fullName : new FormControl(null, [Validators.required]),
-            relationship : new FormControl(null, [Validators.required]),
-            citizenship : new FormControl(null, [Validators.required]),
+            relationship : new FormControl('Father'),
+            citizenship : new FormControl('Indian'),
             isTravelingWithYou : new FormControl(true, [Validators.required])
       })
       this.dependantArray.push(dependantgrp)
