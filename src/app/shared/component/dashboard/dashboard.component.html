@@ -1,0 +1,206 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <label for="userId">User Id</label>
+                            <input type="text" class="form-control" formControlName="userId">
+
+                            <strong class="text-danger" *ngIf="userId.touched && userId.hasError('required')">
+                                User Id is required field!!
+                            </strong>
+                            <ng-container *ngIf="userId.dirty">
+                                <strong class="text-danger d-block" *ngIf="userId.hasError('minlength')">
+                                    User Id should have atleast {{userId.errors?.['minlength'].requiredLength}} & actual
+                                    length is {{userId.errors?.['minlength'].actualLength}}.
+                                </strong>
+                                <strong class="text-danger d-block" *ngIf="userId.hasError('pattern')">
+                                    Please enter alphabets only.
+                                </strong>
+                                <strong class="text-danger d-block" *ngIf="userId.hasError('noSpace')">
+                                    Space is no allowed.
+                                </strong>
+                            </ng-container>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">eMail</label>
+                            <input type="text" class="form-control" formControlName="email">
+
+                            <strong class="text-danger" *ngIf="f['email'].touched && f['email'].hasError('required')">
+                                Email is required field!!
+                            </strong>
+                            <ng-container *ngIf="f['email'].dirty">
+
+                                <strong class="text-danger" *ngIf="f['email'].hasError('pattern')">
+                                    Please enter valid Email Id.
+                                </strong>
+
+                            </ng-container>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="empId">Emp Id</label>
+                            <input type="text" class="form-control" formControlName="empId">
+                            <strong class="text-danger"
+                                *ngIf="f['empId'].touched && f['empId'].hasError('required')">Emp Id is
+                                Mandatory</strong>
+                            <strong class="text-danger"
+                                *ngIf="f['empId'].dirty && f['empId'].hasError('invalidEmpId')">{{f['empId'].errors?.['invalidEmpId']}}</strong>
+                        </div>
+
+                        <div class="row" formGroupName="address">
+                            <div class="col-md-6" formGroupName="current">
+
+                                <h4>Current Address</h4>
+                                <div class="form-group">
+                                    <label for="cur-country">Country</label>
+                                    <select name="Country" class="form-control" formControlName="country">
+                                        <option [ngValue]="contry.name" *ngFor="let contry of country">
+                                            {{contry.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cur-state">State</label>
+                                    <input type="text" class="form-control" formControlName="state">
+                                    <strong
+                                        *ngIf="loginForm.get('address.current.state')?.touched && loginForm.get('address.current.state')?.hasError('required')">
+                                        State is required field
+                                    </strong>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cur-city">City</label>
+                                    <input type="text" class="form-control" formControlName="city">
+                                    <strong
+                                        *ngIf="loginForm.get('address.current.city')?.touched && loginForm.get('address.current.city')?.hasError('required')">
+                                        City is required field
+                                    </strong>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cur-pincode">Pincode</label>
+                                    <input type="text" class="form-control" formControlName="pincode">
+                                    <strong
+                                        *ngIf="loginForm.get('address.current.pincode')?.touched && loginForm.get('address.current.pincode')?.hasError('required')">
+                                        Pincode is required field
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="col-md-6" formGroupName="permanant">
+                                <h4>Permanent Address</h4>
+                                <div class="form-group">
+                                    <label for="per-country">Country</label>
+                                    <select name="Country" formControlName="country" class="form-control">
+                                        <option [ngValue]="contry.name" *ngFor="let contry of country">
+                                            {{contry.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="per-state">State</label>
+                                    <input type="text" class="form-control" formControlName="state">
+                                    <strong
+                                        *ngIf="loginForm.get('address.permanant.state')?.touched && loginForm.get('address.permanant.state')?.hasError('required')">
+                                        State is required field.
+                                    </strong>
+                                </div>
+                                <div class="form-group">
+                                    <label for="per-city">City</label>
+                                    <input type="text" class="form-control" formControlName="city">
+                                    <strong
+                                        *ngIf="loginForm.get('address.permanant.city')?.touched && loginForm.get('address.permanant.city')?.hasError('required')">
+                                        City is required field.
+                                    </strong>
+                                </div>
+                                <div class="form-group">
+                                    <label for="per-pincode">Pincode</label>
+                                    <input type="text" class="form-control" formControlName="pincode">
+                                    <strong
+                                        *ngIf="loginForm.get('address.permanant.pincode')?.touched && loginForm.get('address.permanant.pincode')?.hasError('required')">
+                                        Pincode is required field.
+                                    </strong>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" formControlName="confirm" [disabled]="true">
+                            <label for=""> Is Permanent Address Same As Current Address
+                            </label>
+                        </div>
+                        <div formArrayName="skills">
+                            <div class="row" *ngFor="let skill of skillsArray.controls; let i = index">
+                                <div class="col-10">
+                                    <div class="form-group">
+                                        <input type="text" [formControlName]="i" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-2" *ngIf="i > 0">
+                                    <button mat-raised-button type="button" (click)="onRemove(i)"
+                                        class="btn btn-sm btn-danger">Remove</button>
+                                </div>
+                            </div>
+                            <button *ngIf="skillsArray.length < 5; else skillLength" mat-arised-button
+                                class="btn btn-primary" class="mb-3" (click)="onAddSkill()" type="button">Add Skill</button>
+
+                        </div>
+                        <div formArrayName="dependants">
+                            <div *ngFor="let dependant of dependantArray.controls; let i = index">
+                                <div class="row" [formGroupName]="i">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="fullName">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="relationship">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="citizenship">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <select name="isWithYou" formControlName="isTravelingWithYou" class="form-control">
+                                                <option [ngValue]="true">Yes</option>
+                                                <option [ngValue]="false">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <button class="btn btn-sm form-control" *ngIf="i>0" color="primary" (click)="onRemoved(i)" mat-raised-button type="button">Remove</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <button *ngIf="dependantArray.length<3; else dependance"
+                             mat-raised-button class="button btn-sm mb-3" type="button" (click)="onAddDependants()" color="primary">Add Dependant</button>
+                        </div>
+
+
+                            <button mat-raised-button class="button btn-block" color="primary">Add</button>
+                            <ng-template #skillLength>
+                                <p class="alert alert-warning">
+                                    You can add only 5 skills
+                                </p>
+                            </ng-template>
+                            <ng-template #dependance>
+                                <p class="alert alert-warning">
+                                    You can add only 3 dependants.
+                                </p>
+                            </ng-template>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
